@@ -1,7 +1,15 @@
 import React from 'react';
 
+import NewUser from './components/User/NewUser';
+import GlobalStyle from './assets/global';
+
 function App() {
-  return <h1>Olá</h1>;
+  return (
+    <>
+      <NewUser />
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;
