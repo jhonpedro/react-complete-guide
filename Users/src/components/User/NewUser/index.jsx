@@ -5,14 +5,14 @@ import RoundedBox from '../../UI/RoundedBox';
 
 import { NewUserContainer } from './styles';
 
-const NewUser = () => {
+const NewUser = ({ onAddUser }) => {
   const [name, setName] = useState('');
   const [age, setAge] = useState(1);
 
   function submitHandler(event) {
     event.preventDefault();
 
-    console.log(name, age);
+    onAddUser({ name, age, id: Math.random() });
   }
 
   function nameChangeHandler(event) {
