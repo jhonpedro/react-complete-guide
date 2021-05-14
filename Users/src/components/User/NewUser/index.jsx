@@ -5,12 +5,19 @@ import RoundedBox from '../../UI/RoundedBox';
 
 import { NewUserContainer } from './styles';
 
-const NewUser = ({ onAddUser }) => {
+const NewUser = ({ onAddUser, isUpHandler }) => {
   const [name, setName] = useState('');
   const [age, setAge] = useState(1);
 
   function submitHandler(event) {
     event.preventDefault();
+
+    if (name.length === 0) {
+      isUpHandler('O nome não pode estar vazio!');
+      return;
+    }
+    setName('');
+    setAge(1);
 
     onAddUser({ name, age, id: Math.random() });
   }
