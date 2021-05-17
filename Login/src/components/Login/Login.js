@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../store/auth-context';
 
 const INITIAL_STATE = {
   value: '',
@@ -38,13 +39,14 @@ const passwordReducer = (state, action) => {
   }
 };
 
-const Login = (props) => {
+const Login = () => {
   const [emailState, dispatchEmail] = useReducer(emailReducer, INITIAL_STATE);
   const [passwordState, dispatchPassword] = useReducer(
     passwordReducer,
     INITIAL_STATE
   );
   const [formIsValid, setFormIsValid] = useState(false);
+  const ctx = useContext(AuthContext);
 
   useEffect(() => {
     const indentifier = setTimeout(() => {
@@ -76,7 +78,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    ctx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
