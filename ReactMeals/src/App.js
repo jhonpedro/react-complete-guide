@@ -1,5 +1,15 @@
+import React from 'react'
+
+import GlobalStyle from './assets/global'
+import Header from './Components/UI/Header'
+
 function App() {
-  return <h1>ReactMeals</h1>;
+  return (
+    <React.Fragment>
+      <Header />
+      <GlobalStyle />
+    </React.Fragment>
+  )
 }
 
-export default App;
+export default App
