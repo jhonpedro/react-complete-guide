@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useStore } from '../../../store/context'
+import formatPrice from '../../../utils/formatPrice'
 import Button from '../../UI/Button'
 import { AddToCartContainer, FoodInfo, FoodItemsContainer } from './styles'
 
 const FoodItems = ({ name, description, price }) => {
-  const formatedPrice = price
-    .toString()
-    .replace(/(\d+)(.\d+)?/, (_, n1, n2) => {
-      return `${n1},${!n2 ? '00' : n2}`
-    })
+  const { addCartItem } = useStore()
+  const [quantity, setQuantity] = useState(1)
+
+  const addItemToCart = () => {
+    const itemObj = {
+      name,
+      price,
+      quantity,
+    }
+
+    addCartItem(itemObj)
+  }
+
+  const handleChangeQuantity = (event) => {
+    setQuantity(event.target.value)
+  }
+
+  const formatedPrice = formatPrice(price)
 
   return (
     <FoodItemsContainer>
@@ -19,9 +34,13 @@ const FoodItems = ({ name, description, price }) => {
       <AddToCartContainer>
         <label>
           Amount
-          <input type="number" />
+          <input
+            type="number"
+            value={quantity}
+            onChange={handleChangeQuantity}
+          />
         </label>
-        <Button>+ Add</Button>
+        <Button onClick={addItemToCart}>+ Add</Button>
       </AddToCartContainer>
     </FoodItemsContainer>
   )
