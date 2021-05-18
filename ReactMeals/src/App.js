@@ -1,14 +1,25 @@
 import React from 'react'
 
-import GlobalStyle from './assets/global'
+import Landing from './Components/Landing'
 import Header from './Components/UI/Header'
+
+import GlobalStyle from './assets/global'
+import pamonhaImage from './assets/images/pamonha.jpg'
+import { AppContainer, ImageContainer } from './appStyles'
 
 function App() {
   return (
-    <React.Fragment>
+    <AppContainer>
       <Header />
+      <ImageContainer>
+        <img src={pamonhaImage} alt="Pizza" />
+      </ImageContainer>
+      <Landing
+        title="Food order app"
+        texts="It all started with a small bussiness and now we have a big cross country company!"
+      />
       <GlobalStyle />
-    </React.Fragment>
+    </AppContainer>
   )
 }
 
