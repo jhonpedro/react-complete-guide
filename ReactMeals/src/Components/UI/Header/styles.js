@@ -13,8 +13,6 @@ export const HeaderContainer = styled.header`
   a {
     text-decoration: none;
     font-size: 3rem;
-    color: var(--color-white);
+    color: inherit;
   }
 `
-
-export const CartContainer = styled.div``
