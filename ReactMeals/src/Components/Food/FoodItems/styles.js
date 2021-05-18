@@ -73,6 +73,7 @@ export const AddToCartContainer = styled.div`
   ${Button} {
     background-color: var(--color-primary);
     margin: 1rem 0;
+    width: 100%;
   }
 
   @media (max-width: 1000px) {
