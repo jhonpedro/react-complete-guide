@@ -2,6 +2,7 @@ import React from 'react'
 
 import Landing from './Components/Landing'
 import Header from './Components/UI/Header'
+import FoodPurchases from './Components/Food/FoodPurchases'
 
 import GlobalStyle from './assets/global'
 import pamonhaImage from './assets/images/pamonha.jpg'
@@ -18,6 +19,8 @@ function App() {
         title="Food order app"
         texts="It all started with a small bussiness and now we have a big cross country company!"
       />
+
+      <FoodPurchases />
       <GlobalStyle />
     </AppContainer>
   )
