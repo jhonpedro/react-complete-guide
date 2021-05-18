@@ -5,7 +5,7 @@ export default createGlobalStyle`
     font-size: 62.5%;
 
     --color-pink-lighter: #faf3dd;
-    --color-primary: #fbe134;
+    --color-primary: #ffc600;
     --color-background-darker: #2d2a32;
     --color-secondary: #fff599;
     --color-dark: #2a2e34;
