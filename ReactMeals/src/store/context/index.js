@@ -17,7 +17,24 @@ export const StoreProvider = ({ children }) => {
   }
 
   const addCartItem = (newItem) => {
-    setCartItems((prevState) => [newItem, ...prevState])
+    setCartItems((prevState) => {
+      let wasPushedToArray = false
+      const newState = prevState.map((item) => {
+        if (item.name === newItem.name) {
+          const quantity = parseInt(newItem.quantity) + parseInt(item.quantity)
+          newItem.quantity = quantity
+          wasPushedToArray = true
+          return newItem
+        }
+        return item
+      })
+
+      if (wasPushedToArray) {
+        return newState
+      }
+
+      return [newItem, ...prevState]
+    })
   }
 
   const getIsModalShowing = () => isModalShowing
