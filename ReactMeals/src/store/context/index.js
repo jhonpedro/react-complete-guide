@@ -4,6 +4,7 @@ const StoreContext = createContext({
   isModalShowing: false,
   addCartItem: () => {},
   getCartItems: () => {},
+  editCartItemQuantity: () => {},
   getIsModalShowing: () => {},
   handleClickIsModalShowing: () => {},
 })
@@ -14,6 +15,23 @@ export const StoreProvider = ({ children }) => {
 
   const handleClickIsModalShowing = () => {
     setIsModalShowing((prevState) => !prevState)
+  }
+
+  const editCartItemQuantity = (index, action) => {
+    setCartItems((prevState) => {
+      const newState = [...prevState]
+      if (action === 'sum') {
+        newState[index].quantity += 1
+      }
+      if (action === 'sub') {
+        newState[index].quantity -= 1
+        if (newState[index].quantity === 0) {
+          newState.splice(index, 1)
+        }
+      }
+
+      return newState
+    })
   }
 
   const addCartItem = (newItem) => {
@@ -47,6 +65,7 @@ export const StoreProvider = ({ children }) => {
         getIsModalShowing,
         addCartItem,
         getCartItems,
+        editCartItemQuantity,
       }}
     >
       {children}
