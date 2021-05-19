@@ -9,6 +9,7 @@ const ModalElement = ({ disposeModal, items }) => (
     <ModalBox>
       {items.map((item) => (
         <CartItem
+          key={item.name}
           name={item.name}
           price={item.price}
           quantity={item.quantity}
