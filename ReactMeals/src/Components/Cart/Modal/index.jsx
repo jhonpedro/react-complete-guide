@@ -4,8 +4,9 @@ import { useStore } from '../../../store/context'
 import CartItem from '../CartItem'
 import Button from '../../UI/Button'
 import { ModalBox, ModalContainer, PurchaseAmount } from './styles'
+import formatPrice from '../../../utils/formatPrice'
 
-const ModalElement = ({ disposeModal, items }) => (
+const ModalElement = ({ disposeModal, items, total }) => (
   <ModalContainer>
     <ModalBox>
       {items.length === 0 && (
@@ -24,7 +25,7 @@ const ModalElement = ({ disposeModal, items }) => (
       <PurchaseAmount>
         <strong>
           <span>Total amount</span>
-          <span>0</span>
+          <span>R$ {formatPrice(total)}</span>
         </strong>
         <div>
           <Button onClick={disposeModal}>Close</Button>
@@ -44,9 +45,20 @@ const Modal = () => {
 
   const disposeModal = () => handleClickIsModalShowing()
 
+  const cartItems = getCartItems()
+  const cartTotal = cartItems.reduce(
+    (acc, current) =>
+      acc + parseInt(current.price) * parseInt(current.quantity),
+    0
+  )
+
   return isShowing()
     ? ReactDOM.createPortal(
-        <ModalElement disposeModal={disposeModal} items={getCartItems()} />,
+        <ModalElement
+          disposeModal={disposeModal}
+          items={cartItems}
+          total={cartTotal}
+        />,
         document.getElementById('modal')
       )
     : null
