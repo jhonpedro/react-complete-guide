@@ -7,7 +7,7 @@ export const ImageContainer = styled.div`
   overflow: hidden;
 
   img {
-    margin-top: -2rem;
+    margin-top: 8rem;
     z-index: -2;
     position: relative;
 
