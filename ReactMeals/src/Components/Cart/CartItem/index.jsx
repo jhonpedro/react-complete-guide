@@ -21,7 +21,7 @@ const CartItem = ({ name, price, quantity, index }) => {
         <strong>{name}</strong>
         <div>
           <span>{formatedPrice}</span>
-          <span>x {quantity}</span>
+          <span>x{quantity}</span>
         </div>
       </CartItemInfo>
       <AddToQuantity>
