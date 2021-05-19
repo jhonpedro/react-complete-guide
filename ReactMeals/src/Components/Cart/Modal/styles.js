@@ -10,6 +10,15 @@ const fadeIn = keyframes`
   }
 `
 
+export const Backdrop = styled.div`
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+`
+
 export const ModalContainer = styled.div`
   height: 100vh;
   width: 100vw;
@@ -21,7 +30,7 @@ export const ModalContainer = styled.div`
   z-index: 10;
 
   animation: ease 500ms ${fadeIn};
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.4);
 
   display: flex;
   justify-content: center;

@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import { useStore } from '../../../store/context'
 import CartItem from '../CartItem'
 import Button from '../../UI/Button'
-import { ModalBox, ModalContainer, PurchaseAmount } from './styles'
+import { Backdrop, ModalBox, ModalContainer, PurchaseAmount } from './styles'
 import formatPrice from '../../../utils/formatPrice'
 
 const ModalElement = ({ disposeModal, items, total }) => (
   <ModalContainer>
+    <Backdrop onClick={disposeModal} />
     <ModalBox>
       {items.length === 0 && (
         <strong>There is nothing in the cart, close and add one!</strong>
