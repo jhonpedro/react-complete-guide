@@ -35,6 +35,7 @@ const FoodItems = ({ name, description, price }) => {
         <label>
           Amount
           <input
+            min="1"
             type="number"
             value={quantity}
             onChange={handleChangeQuantity}
