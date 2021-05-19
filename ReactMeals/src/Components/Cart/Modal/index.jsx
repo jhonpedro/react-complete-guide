@@ -7,9 +7,10 @@ import { ModalBox, ModalContainer } from './styles'
 const ModalElement = ({ disposeModal, items }) => (
   <ModalContainer onClick={disposeModal}>
     <ModalBox>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <CartItem
           key={item.name}
+          index={index}
           name={item.name}
           price={item.price}
           quantity={item.quantity}
