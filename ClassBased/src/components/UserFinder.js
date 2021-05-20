@@ -22,10 +22,16 @@ class UserFinder extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.filterName !== this.state.filterName) {
+      const newFilteredUsers = this.context.users.filter((user) =>
+        user.name.includes(this.state.filterName)
+      );
+
+      if (newFilteredUsers.length === 0) {
+        throw new Error('No users found');
+      }
+
       this.setState({
-        filteredUsers: this.context.users.filter((user) =>
-          user.name.includes(this.state.filterName)
-        ),
+        filteredUsers: newFilteredUsers,
       });
     }
   }
