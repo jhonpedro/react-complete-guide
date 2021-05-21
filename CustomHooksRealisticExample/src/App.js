@@ -10,19 +10,16 @@ function App() {
     'https://test-f860d-default-rtdb.firebaseio.com/tasks.json'
   );
 
-  const fetchTasks = useCallback(
-    async (taskText) => {
-      const data = await request();
-      const loadedTasks = [];
+  const fetchTasks = useCallback(async () => {
+    const data = await request();
+    const loadedTasks = [];
 
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      }
+    for (const taskKey in data) {
+      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+    }
 
-      setTasks(loadedTasks);
-    },
-    [request]
-  );
+    setTasks(loadedTasks);
+  }, [request]);
 
   useEffect(() => {
     fetchTasks();
