@@ -12,33 +12,44 @@ function App() {
   const getMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('https://swapi.dev/api/films');
+      const response = await fetch(
+        'https://test-f860d-default-rtdb.firebaseio.com/movies.json'
+      );
 
       if (!response.ok) {
         throw new Error();
       }
 
       const data = await response.json();
-      setMovies(
-        data.results.map((movieItem) => {
-          return {
-            id: movieItem.episode_id,
-            title: movieItem.title,
-            openingText: movieItem.opening_crawl,
-            releaseDate: movieItem.release_date,
-          };
-        })
-      );
+      console.log(data);
+
+      const loadedMovies = [];
+
+      for (const index in data) {
+        loadedMovies.push({
+          id: index,
+          title: data[index].title,
+          openingText: data[index].openingText,
+          releaseDate: data[index].releaseDate,
+        });
+      }
+
+      setMovies(loadedMovies);
       setError('');
     } catch (error) {
-      setError('Something went wrong');
+      setError('');
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  function addMovieHandler(movie) {
-    console.log(movie);
+  async function addMovieHandler(movie) {
+    await fetch('https://test-f860d-default-rtdb.firebaseio.com/movies.json', {
+      method: 'POST',
+      body: JSON.stringify(movie),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    getMoviesHandler();
   }
 
   useEffect(() => {
