@@ -7,7 +7,8 @@ import TaskForm from './TaskForm';
 const NewTask = (props) => {
   const [isLoading, error, request] = useHTTPRequest(
     'https://test-f860d-default-rtdb.firebaseio.com/tasks.json',
-    'POST'
+    'POST',
+    { 'Content-Type': 'application/json' }
   );
 
   const enterTaskHandler = async (taskText) => {
