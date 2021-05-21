@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
@@ -10,20 +10,23 @@ function App() {
     'https://test-f860d-default-rtdb.firebaseio.com/tasks.json'
   );
 
-  const fetchTasks = async (taskText) => {
-    const data = await request();
-    const loadedTasks = [];
+  const fetchTasks = useCallback(
+    async (taskText) => {
+      const data = await request();
+      const loadedTasks = [];
 
-    for (const taskKey in data) {
-      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-    }
+      for (const taskKey in data) {
+        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      }
 
-    setTasks(loadedTasks);
-  };
+      setTasks(loadedTasks);
+    },
+    [request]
+  );
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
     setTasks((prevTasks) => prevTasks.concat(task));
