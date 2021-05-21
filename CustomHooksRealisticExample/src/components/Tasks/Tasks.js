@@ -1,3 +1,4 @@
+import React from 'react';
 import Section from '../UI/Section';
 import TaskItem from './TaskItem';
 import classes from './Tasks.module.css';
@@ -18,7 +19,12 @@ const Tasks = (props) => {
   let content = taskList;
 
   if (props.error) {
-    content = <button onClick={props.onFetch}>Try again</button>;
+    content = (
+      <React.Fragment>
+        <p>{props.error}</p>
+        <button onClick={props.onFetch}>Try again</button>
+      </React.Fragment>
+    );
   }
 
   if (props.loading) {
