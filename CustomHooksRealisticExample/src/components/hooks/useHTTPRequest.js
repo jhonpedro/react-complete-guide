@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useHTTPRequest = (url, method) => {
+const useHTTPRequest = (url, method, headers) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -9,11 +9,9 @@ const useHTTPRequest = (url, method) => {
     setError(null);
     try {
       const response = await fetch(url, {
-        method,
-        body,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: !method ? 'GET' : method,
+        body: !body ? null : body,
+        headers: !headers ? {} : headers,
       });
 
       if (!response.ok) {
