@@ -13,6 +13,8 @@ export const StoreProvider = ({ children }) => {
   const [isModalShowing, setIsModalShowing] = useState(false)
   const [cartItems, setCartItems] = useState([])
 
+  const resetCart = () => setCartItems([])
+
   const handleClickIsModalShowing = () => {
     setIsModalShowing((prevState) => !prevState)
   }
@@ -66,6 +68,7 @@ export const StoreProvider = ({ children }) => {
         addCartItem,
         getCartItems,
         editCartItemQuantity,
+        resetCart,
       }}
     >
       {children}
