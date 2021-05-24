@@ -73,6 +73,15 @@ button {
   cursor: pointer;
 }
 
+button:disabled,
+button:focus,
+button:hover,
+button:active {
+  background: #ccc;
+  color: rgb(56, 56, 56);
+  border-color: #ccc;
+}
+
 button:hover,
 button:active {
   background-color: #33059e;
