@@ -1,38 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useStore } from '../../../store/context'
-import CartItem from '../CartItem'
-import Button from '../../UI/Button'
-import { Backdrop, ModalBox, ModalContainer, PurchaseAmount } from './styles'
-import formatPrice from '../../../utils/formatPrice'
+import { Backdrop, ModalBox, ModalContainer } from './styles'
+import PurchaseInfo from '../PurchaseInfo'
+import Ordering from '../Ordering'
 
-const ModalElement = ({ disposeModal, items, total }) => (
+const ModalElement = ({
+  disposeModal,
+  items,
+  total,
+  isOrdering,
+  clickOrderHandler,
+}) => (
   <ModalContainer>
     <Backdrop onClick={disposeModal} />
     <ModalBox>
-      {items.length === 0 && (
-        <strong>There is nothing in the cart, close and add one!</strong>
+      {isOrdering ? (
+        <Ordering cartTotal={total} items={items} disposeModal={disposeModal} />
+      ) : (
+        <PurchaseInfo
+          disposeModal={disposeModal}
+          items={items}
+          cartTotal={total}
+          clickOrderHandler={clickOrderHandler}
+        />
       )}
-      {items.length > 0 &&
-        items.map((item, index) => (
-          <CartItem
-            key={item.name}
-            index={index}
-            name={item.name}
-            price={item.price}
-            quantity={item.quantity}
-          />
-        ))}
-      <PurchaseAmount>
-        <strong>
-          <span>Total amount</span>
-          <span>R$ {formatPrice(total)}</span>
-        </strong>
-        <div>
-          <Button onClick={disposeModal}>Close</Button>
-          <Button>Order</Button>
-        </div>
-      </PurchaseAmount>
     </ModalBox>
   </ModalContainer>
 )
@@ -43,13 +35,15 @@ const Modal = () => {
     handleClickIsModalShowing,
     getCartItems,
   } = useStore()
+  const [isOrdering, setIsOrdering] = useState(false)
 
+  const clickOrderHandler = () => setIsOrdering((prevState) => !prevState)
   const disposeModal = () => handleClickIsModalShowing()
 
   const cartItems = getCartItems()
   const cartTotal = cartItems.reduce(
     (acc, current) =>
-      acc + parseInt(current.price) * parseInt(current.quantity),
+      acc + parseFloat(current.price) * parseFloat(current.quantity),
     0
   )
 
@@ -59,6 +53,8 @@ const Modal = () => {
           disposeModal={disposeModal}
           items={cartItems}
           total={cartTotal}
+          isOrdering={isOrdering}
+          clickOrderHandler={clickOrderHandler}
         />,
         document.getElementById('modal')
       )
