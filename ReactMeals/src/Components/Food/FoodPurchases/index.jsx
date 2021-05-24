@@ -1,30 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import useHTTPRequest from '../../../hooks/useHTTPRequest'
 import FoodItems from '../FoodItems'
 import { FoodPurchasesContainer } from './style'
 
-const foodItems = [
-  {
-    title: 'Pamonha',
-    description:
-      'One of the most delicious food in Oeste-Goiano, it is a corn based food.',
-    price: 2.0,
-  },
-  {
-    title: 'Cural',
-    description:
-      'The most delicious food in Oeste-Goiano, it is a corn based food, and it is like sweet porridge.',
-    price: 2.0,
-  },
-  {
-    title: 'Angu',
-    description: 'One good option for who wants a salty corn based porridge.',
-    price: 2.0,
-  },
-]
-
 const FoodPurchases = () => {
+  const [foodItems, setFoodItems] = useState([])
+  const [isLoading, error, request] = useHTTPRequest(
+    'https://test-f860d-default-rtdb.firebaseio.com/meals.json'
+  )
+
+  useEffect(() => {
+    request().then((response) => {
+      const newFoodItems = []
+      for (const key in response) {
+        newFoodItems.push({
+          id: key,
+          title: response[key].title,
+          description: response[key].description,
+          price: response[key].price,
+        })
+      }
+
+      setFoodItems(newFoodItems)
+    })
+  }, [request])
+
   return (
     <FoodPurchasesContainer>
+      {isLoading && !error && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       {foodItems.map((item, index) => {
         return (
           <FoodItems
