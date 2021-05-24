@@ -32,7 +32,9 @@ const PurchaseInfo = ({
         </strong>
         <div>
           <Button onClick={disposeModal}>Close</Button>
-          <Button onClick={clickOrderHandler}>Order</Button>
+          {items.length !== 0 && (
+            <Button onClick={clickOrderHandler}>Order</Button>
+          )}
         </div>
       </PurchaseAmount>
     </React.Fragment>
