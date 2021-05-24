@@ -74,9 +74,9 @@ button {
 }
 
 button:disabled,
-button:focus,
-button:hover,
-button:active {
+button:disabled:focus,
+button:disabled:hover,
+button:disabled:active {
   background: #ccc;
   color: rgb(56, 56, 56);
   border-color: #ccc;
