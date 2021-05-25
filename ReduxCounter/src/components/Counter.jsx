@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { counterActions } from '../store/index';
+import { counterActions } from '../store/slices/counterSlice';
 
 import classes from './Counter.module.css';
 
 const INCREMENT_BY = 3;
 
 const Counter = () => {
-  const { counter, showCounter } = useSelector((state) => state);
+  const { counter, showCounter } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
   const toggleCounterHandler = () => {
