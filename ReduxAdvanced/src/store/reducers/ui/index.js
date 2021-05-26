@@ -1,8 +1,9 @@
 import produce from 'immer';
-import { TOGGLE } from './actionTypes';
+import { NOTIFICATION, TOGGLE } from './actionTypes';
 
 const initial_value = {
   showCart: false,
+  notification: null,
 };
 
 const uiReducer = (state = initial_value, action) => {
@@ -12,8 +13,12 @@ const uiReducer = (state = initial_value, action) => {
         draft.showCart = !draft.showCart;
         break;
       }
-      default: {
+      case NOTIFICATION: {
+        draft.notification = action.payload;
         break;
+      }
+      default: {
+        return { ...state };
       }
     }
   });
