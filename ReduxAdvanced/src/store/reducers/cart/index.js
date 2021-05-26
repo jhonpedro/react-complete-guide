@@ -9,20 +9,15 @@ const cartReducer = (state = initial_value, action) => {
       case ADD_TO_CART: {
         const { title, price, description } = action.payload;
 
-        let wasChanged = false;
-        for (let i = 0; i < draft.length; i++) {
-          if (draft[i].title === title) {
-            draft[i].quantity += 1;
-            wasChanged = true;
-            break;
-          }
-        }
+        const existingItem = draft.find((item) => item.title === title);
 
-        if (wasChanged) {
+        if (!existingItem) {
+          draft.push({ title, price, description, quantity: 1 });
           break;
         }
 
-        draft.push({ title, price, description, quantity: 1 });
+        existingItem.quantity += 1;
+
         break;
       }
       case CHANGE_QUANTITY: {
@@ -30,13 +25,16 @@ const cartReducer = (state = initial_value, action) => {
 
         const operationResult = operation === 'sum' ? +1 : -1;
 
-        for (let i = 0; i < draft.length; i++) {
-          if (draft[i].title === itemTitle) {
-            draft[i].quantity += operationResult;
-          }
-          if (draft[i].quantity === 0) {
-            draft.splice(i, 1);
-          }
+        let existingItemIndex = -1;
+        const existingItem = draft.find((item, index) => {
+          existingItemIndex = index;
+          return item.title === itemTitle;
+        });
+
+        existingItem.quantity += operationResult;
+
+        if (existingItem.quantity === 0) {
+          draft.splice(existingItemIndex, 1);
         }
 
         break;
