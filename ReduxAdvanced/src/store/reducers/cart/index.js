@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { ADD_TO_CART, CHANGE_QUANTITY } from './actionTypes';
+import { ADD_TO_CART, CHANGE_QUANTITY, REPLACE_CART } from './actionTypes';
 
 const initial_value = [];
 
@@ -38,6 +38,13 @@ const cartReducer = (state = initial_value, action) => {
         }
 
         break;
+      }
+      case REPLACE_CART: {
+        if (!action.payload) {
+          return;
+        }
+
+        return action.payload.slice();
       }
       default: {
         break;
