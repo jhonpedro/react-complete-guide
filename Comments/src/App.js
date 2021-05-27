@@ -1,10 +1,12 @@
 import Routes from './routes/route';
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
-    <React.Fragment>
+    <Provider store={store}>
       <Routes />
-    </React.Fragment>
+    </Provider>
   );
 }
 
