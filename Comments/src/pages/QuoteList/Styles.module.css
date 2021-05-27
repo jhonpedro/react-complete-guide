@@ -1,0 +1,17 @@
+.paragraph {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 2rem;
+
+  border: 1px solid #999;
+}
+
+.quote-container {
+  width: 90%;
+  margin: 0 auto;
+}
