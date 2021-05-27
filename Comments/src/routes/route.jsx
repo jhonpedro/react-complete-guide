@@ -1,13 +1,27 @@
-import { Route, Switch } from 'react-router-dom';
-import NewCommentForm from '../components/comments/NewCommentForm';
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import MainHeader from '../components/layout/MainNavigation';
+import AddTask from '../pages/AddQuote';
+import QuoteList from '../pages/QuoteList';
 
 const Routes = () => {
   return (
-    <Switch>
-      <Route path="/newTask">
-        <NewCommentForm />
-      </Route>
-    </Switch>
+    <React.Fragment>
+      <MainHeader />
+      <main>
+        <Switch>
+          <Route path="/new">
+            <AddTask />
+          </Route>
+          <Route path="/quotes" exact>
+            <QuoteList />
+          </Route>
+          <Route path="*">
+            <Redirect to="/new" />
+          </Route>
+        </Switch>
+      </main>
+    </React.Fragment>
   );
 };
 
