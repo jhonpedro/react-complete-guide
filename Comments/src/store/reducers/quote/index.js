@@ -3,7 +3,7 @@ import { ADD_QUOTE } from './actionTypes';
 
 const initial_value = [];
 
-const quoteReducer = (state = initial_value, action) => {
+const quotesReducer = (state = initial_value, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
       case ADD_QUOTE: {
@@ -17,4 +17,4 @@ const quoteReducer = (state = initial_value, action) => {
   });
 };
 
-export default quoteReducer;
+export default quotesReducer;
