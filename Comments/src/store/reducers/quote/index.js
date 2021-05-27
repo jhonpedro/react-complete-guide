@@ -11,7 +11,7 @@ const quotesReducer = (state = initial_value, action) => {
         break;
       }
       default: {
-        return { ...state };
+        return [...state];
       }
     }
   });
