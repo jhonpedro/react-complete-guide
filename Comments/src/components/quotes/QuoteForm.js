@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import React from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, Prompt } from 'react-router-dom';
 import { actionAddQuote } from '../../store/reducers/quote/actions';
 import generateRandomId from '../../utils/generateRandomId';
 
@@ -9,6 +10,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './QuoteForm.module.css';
 
 const QuoteForm = (props) => {
+  const [isEntering, setIsEntering] = useState(false);
   const authorInputRef = useRef();
   const textInputRef = useRef();
   const dispatch = useDispatch();
@@ -34,28 +36,50 @@ const QuoteForm = (props) => {
     push('/quotes');
   }
 
-  return (
-    <Card>
-      <form className={classes.form} onSubmit={submitFormHandler}>
-        {props.isLoading && (
-          <div className={classes.loading}>
-            <LoadingSpinner />
-          </div>
-        )}
+  const formFocusHandler = () => {
+    setIsEntering(true);
+  };
 
-        <div className={classes.control}>
-          <label htmlFor="author">Author</label>
-          <input type="text" id="author" ref={authorInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="text">Text</label>
-          <textarea id="text" rows="5" ref={textInputRef}></textarea>
-        </div>
-        <div className={classes.actions}>
-          <button className="btn">Add Quote</button>
-        </div>
-      </form>
-    </Card>
+  const finishEnteringHandler = () => {
+    setIsEntering(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Prompt
+        when={isEntering}
+        message={() =>
+          'Are you shure you want to leave? All your data will be lost'
+        }
+      />
+      <Card>
+        <form
+          onFocus={formFocusHandler}
+          className={classes.form}
+          onSubmit={submitFormHandler}
+        >
+          {props.isLoading && (
+            <div className={classes.loading}>
+              <LoadingSpinner />
+            </div>
+          )}
+
+          <div className={classes.control}>
+            <label htmlFor="author">Author</label>
+            <input type="text" id="author" ref={authorInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="text">Text</label>
+            <textarea id="text" rows="5" ref={textInputRef}></textarea>
+          </div>
+          <div className={classes.actions}>
+            <button className="btn" onClick={finishEnteringHandler}>
+              Add Quote
+            </button>
+          </div>
+        </form>
+      </Card>
+    </React.Fragment>
   );
 };
 
