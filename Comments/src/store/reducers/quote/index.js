@@ -1,12 +1,12 @@
 import { produce } from 'immer';
-import { ADD_TASK } from './actionTypes';
+import { ADD_QUOTE } from './actionTypes';
 
 const initial_value = [];
 
-const commentsReducer = (state = initial_value, action) => {
+const quoteReducer = (state = initial_value, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
-      case ADD_TASK: {
+      case ADD_QUOTE: {
         draft.push(action.payload);
         break;
       }
@@ -17,4 +17,4 @@ const commentsReducer = (state = initial_value, action) => {
   });
 };
 
-export default commentsReducer;
+export default quoteReducer;
