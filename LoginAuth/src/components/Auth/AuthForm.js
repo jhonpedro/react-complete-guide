@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
+import firebaseRequest from '../../services/firebaseRequest';
+import { useAuth } from '../../store/auth';
 
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [requestResult, setRequestResult] = useState({});
+  const requestSingUp = firebaseRequest(
+    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCb8jUUCUIIJHY_HMEuomEPDaPgrWSGNOs'
+  );
+  const requestSingIn = firebaseRequest(
+    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCb8jUUCUIIJHY_HMEuomEPDaPgrWSGNOs'
+  );
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { login } = useAuth();
 
   useEffect(() => {
     let timer;
-    if (!!requestResult.message) {
+    if (requestResult.message) {
       timer = setTimeout(() => setRequestResult({}), 10000);
     }
 
@@ -28,40 +37,44 @@ const AuthForm = () => {
     const passwordValue = passwordRef.current.value;
 
     if (isLogin) {
-      console.log();
-      return;
-    }
-    const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCb8jUUCUIIJHY_HMEuomEPDaPgrWSGNOs',
-      {
-        method: 'POST',
-        body: JSON.stringify({
+      const response = await requestSingIn(
+        JSON.stringify({
           email: emailValue,
           password: passwordValue,
           returnSecureToken: true,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        })
+      );
+      if (response.error && response.error.message) {
+        setRequestResult({
+          message: `Error: ${response.error.message}`,
+          status: 'error',
+        });
+        return;
       }
+
+      login(response.idToken);
+      return;
+    }
+
+    const response = await requestSingUp(
+      JSON.stringify({
+        email: emailValue,
+        password: passwordValue,
+        returnSecureToken: true,
+      })
     );
-
-    const data = await response.json();
-
-    if (!response.ok) {
+    if (response.error && response.error.message) {
       setRequestResult({
-        message: `Error: ${data.error.message}`,
+        message: `Error: ${response.error.message}`,
         status: 'error',
       });
       return;
     }
-
     setIsLogin(true);
     setRequestResult({
       message: `You've created your account`,
       status: 'success',
     });
-    return;
   };
 
   return (
