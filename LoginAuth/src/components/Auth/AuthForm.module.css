@@ -70,3 +70,18 @@
   background-color: transparent;
   color: #ae82cc;
 }
+
+.resultMessage {
+  display: block;
+  text-align: center;
+  margin: 1rem 0;
+
+  font-size: 20px;
+}
+
+.resultErrorMessage {
+  color: red;
+}
+.resultSuccessMessage {
+  color: green;
+}
