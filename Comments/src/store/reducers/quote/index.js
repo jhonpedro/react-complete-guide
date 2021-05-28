@@ -19,7 +19,6 @@ const quotesReducer = (state = initial_value, action) => {
           break;
         }
 
-        console.log(action.payload);
         quote.comments.push(action.payload.comment);
         break;
       }
