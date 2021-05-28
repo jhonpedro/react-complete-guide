@@ -3,13 +3,14 @@ import UserProfile from '../components/Profile/UserProfile';
 import { useAuth } from '../store/auth';
 
 const ProfilePage = () => {
-  const { getToken } = useAuth();
+  const { getToken, logout } = useAuth();
+  const token = getToken();
 
-  if (!getToken()) {
+  if (!token) {
     return <Redirect to="/auth" />;
   }
 
-  return <UserProfile />;
+  return <UserProfile token={token} logout={logout} />;
 };
 
 export default ProfilePage;
