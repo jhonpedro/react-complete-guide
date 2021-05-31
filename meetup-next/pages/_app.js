@@ -1,10 +1,13 @@
 import '../styles/globals.css';
 import Layout from '../components/layout/Layout';
+import MeetupProvider from '../store/meetups';
 
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <MeetupProvider>
+        <Component {...pageProps} />
+      </MeetupProvider>
     </Layout>
   );
 }
