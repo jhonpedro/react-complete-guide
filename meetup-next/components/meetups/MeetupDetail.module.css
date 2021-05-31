@@ -1,0 +1,38 @@
+.meetup-detail-box {
+  width: 100%;
+  overflow: hidden;
+
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.meetup-detail-box .image-container {
+  width: 100%;
+}
+
+.meetup-detail-box .image-container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.title-and-address {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  margin-bottom: 10px;
+}
+
+.title-and-address strong {
+  font-size: 25px;
+  line-height: 15px;
+  margin-top: 15px;
+}
+.title-and-address span {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.meetup-detail-box p {
+  padding: 5px 20px 10px;
+}
