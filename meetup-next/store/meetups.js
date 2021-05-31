@@ -1,13 +1,13 @@
 import { createContext, useContext, useState } from 'react';
-import initial_value from './initial-value';
 
 const MeetupContext = createContext({
+  setMeetups: (meetups) => {},
   addMeetup: (newMeetup) => {},
   getMeetups: () => {},
   getByMeetupId: (id) => {},
 });
 
-const MeetupProvider = ({ children }) => {
+const MeetupProvider = ({ children, meetups: initial_value }) => {
   const [meetups, setMeetups] = useState(initial_value);
 
   const addMeetup = (newMeetup) => {
@@ -28,6 +28,7 @@ const MeetupProvider = ({ children }) => {
         addMeetup,
         getMeetups,
         getByMeetupId,
+        setMeetups,
       }}
     >
       {children}
