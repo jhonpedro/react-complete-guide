@@ -14,10 +14,37 @@
 }
 
 .ModalShow {
-  opacity: 1;
-  transform: translateY(0);
+  animation: openModal ease 300ms forwards;
 }
 .ModalHide {
-  opacity: 0;
-  transform: translateY(100%);
+  animation: closeModal ease 300ms forwards;
+}
+
+@keyframes openModal {
+  0% {
+    opacity: 0;
+    transform: translateY(-1000%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes closeModal {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(1000%);
+  }
 }
