@@ -14,8 +14,11 @@ function MyApp({ Component, pageProps, meetups }) {
 }
 
 MyApp.getInitialProps = async () => {
+  const response = await fetch('http://localhost:3000/api/');
+  const dataJSON = await response.json();
+
   return {
-    meetups: initial_value,
+    meetups: dataJSON.data,
   };
 };
 
