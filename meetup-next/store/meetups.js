@@ -19,7 +19,8 @@ const MeetupProvider = ({ children, meetups: initial_value }) => {
   };
 
   const getByMeetupId = (id) => {
-    return meetups.find((meetup) => meetup.id === id);
+    console.log(meetups, id);
+    return meetups.find((meetup) => meetup._id === id);
   };
 
   return (
