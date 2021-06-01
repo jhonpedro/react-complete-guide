@@ -25,6 +25,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>React Animations</h1>
+        <Modal closed={this.handleModal} show={this.state.showModal} />
         <Transition
           in={this.state.showModal}
           timeout={500}
@@ -34,7 +35,6 @@ class App extends Component {
           {(state) => {
             return (
               <React.Fragment>
-                <Modal closed={this.handleModal} show={state} />
                 <Backdrop show={state} />
               </React.Fragment>
             );

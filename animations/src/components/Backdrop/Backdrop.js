@@ -10,7 +10,6 @@ const backdrop = (props) => {
       ? 'BackdropHide'
       : null
   }`;
-  console.log(props.show);
 
   return <div className={backdropClass}></div>;
 };
