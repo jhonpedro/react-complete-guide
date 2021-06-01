@@ -6,7 +6,7 @@ import { useMeetups } from '../../store/meetups';
 export default function MeetupSpecification() {
   const { meetUpId } = useRouter().query;
   const { getByMeetupId } = useMeetups();
-  const meetup = getByMeetupId(parseInt(meetUpId));
+  const meetup = getByMeetupId(meetUpId);
 
   return (
     <Fragment>
