@@ -1,12 +1,11 @@
 import React from 'react';
 
 import ProductItem from '../components/Products/ProductItem';
-import { useProduct } from '../context/products';
+import useSelector from '../hook-store/useSelector';
 import './Products.css';
 
 const Products = (props) => {
-  const { getProducts } = useProduct();
-  const productList = getProducts();
+  const productList = useSelector((state) => state.products);
 
   return (
     <ul className="products-list">
