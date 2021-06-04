@@ -14,10 +14,16 @@ function App() {
     });
   };
 
+  const removeTodoItem = (text: string) => {
+    setTodos((prevState) => {
+      return prevState.filter((todo) => todo.text !== text);
+    });
+  };
+
   return (
     <div className="App">
       <NewTodo addTodo={addTodo} />
-      <Todos items={todos} />
+      <Todos items={todos} removeTodoItem={removeTodoItem} />
     </div>
   );
 }
