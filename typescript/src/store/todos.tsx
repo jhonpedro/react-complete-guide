@@ -4,7 +4,7 @@ import Todos from '../models/todo';
 interface TodosContextI {
   todos: Todos[];
   addTodo: (text: string) => void;
-  removeTodo: (text: string) => void;
+  removeTodo: (id: string) => void;
 }
 
 const TodosContext = createContext<TodosContextI>({} as TodosContextI);
@@ -19,9 +19,9 @@ const TodosContextProvider: React.FC = ({ children }) => {
     });
   };
 
-  const removeTodo = (text: string) => {
+  const removeTodo = (id: string) => {
     setTodos((prevState) => {
-      return prevState.filter((todo) => todo.text !== text);
+      return prevState.filter((todo) => todo.id !== id);
     });
   };
 

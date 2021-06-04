@@ -9,15 +9,15 @@ interface TodosProps {
 }
 
 const Todos: React.FC<TodosProps> = ({ items, removeTodoItem }) => {
-  const removeTodo = (text: string) => {
-    removeTodoItem(text);
-  };
-
   return (
     <ul className={classes.todos}>
       {items.map((item) => {
         return (
-          <TodoItem text={item.text} key={item.id} removeTodo={removeTodo} />
+          <TodoItem
+            text={item.text}
+            key={item.id}
+            removeTodo={removeTodoItem.bind(null, item.id)}
+          />
         );
       })}
     </ul>
