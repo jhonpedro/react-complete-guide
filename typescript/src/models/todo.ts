@@ -4,7 +4,7 @@ class Todo {
 
   constructor(text: string) {
     this.text = text;
-    this.id = new Date().toString();
+    this.id = `${new Date().getTime()}_${Math.random()}`;
   }
 }
 
